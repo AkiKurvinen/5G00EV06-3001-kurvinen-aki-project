@@ -43,6 +43,54 @@ function Recipe() {
     html += "</table>";
     return html;
   };
+  function getGlassIcon(glasstype, drinkName) {
+    let glass = glasstype.toLowerCase();
+
+    if (glass.includes("mug")) {
+      return "mug";
+    } else if (glass.includes("whiskey")) {
+      return "whiskey";
+    } else if (glass.includes("white wine")) {
+      return "white-wine";
+    } else if (glass.includes("red wine")) {
+      return "red-wine";
+    } else if (glass.includes("old-fashioned")) {
+      return "whiskey";
+    } else if (glass.includes("jar")) {
+      return "jar";
+    } else if (glass.includes("flute")) {
+      return "flute";
+    } else if (glass.includes("collins")) {
+      return "hiball";
+    } else if (glass.includes("highball")) {
+      return "hiball";
+    } else if (glass.includes("beer")) {
+      return "beer";
+    } else if (glass.includes("shot")) {
+      return "shot";
+    } else if (glass.includes("pitcher")) {
+      return "pitcher";
+    } else if (glass.includes("whiskey sour")) {
+      return "whisky-sour-glass";
+    } else if (glass.includes("coupette")) {
+      return "coupe";
+    } else if (glass.includes("margarita")) {
+      return "margarita";
+    } else if (glass.includes("nick")) {
+      return "nick-and-nora";
+    } else if (glass.includes("balloon")) {
+      return "balloon";
+    } else if (glass.includes("parfait")) {
+      return "parfait";
+    } else if (glass.includes("cocktail")) {
+      return drinkName.toLowerCase().includes("margarita")
+        ? "margarita"
+        : "martini";
+    } else {
+      return "noicon";
+    }
+  }
+
   useEffect(() => {
     const getDataFromAPI = async () => {
       console.log("getDataFromAPI");
@@ -66,13 +114,26 @@ function Recipe() {
                   <div>
                     <img
                       className="drinkImg"
-                      src={drink.strDrinkThumb}
+                      src={drink.strDrinkThumb + "/preview"}
                       alt={drink.strDrink}
                     />
                     <h2>
                       <i>{drink.strDrink}</i>
                     </h2>
-                    <p className="glassType">{drink.strGlass}</p>
+                    <figure>
+                      <img
+                        className="glassImg"
+                        src={
+                          "/images/glass/" +
+                          getGlassIcon(drink.strGlass, drink.strDrink) +
+                          ".png"
+                        }
+                        alt={drink.strGlass}
+                      />{" "}
+                      <figcaption className="glassType">
+                        {drink.strGlass}
+                      </figcaption>
+                    </figure>
                     <p className="isAlcoholic">{drink.strAlcoholic}</p>
                     <p className="inst">
                       <span>Instructions: </span>
