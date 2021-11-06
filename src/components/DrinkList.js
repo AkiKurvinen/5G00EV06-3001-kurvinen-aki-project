@@ -42,10 +42,11 @@ function DrinkList() {
 
   return (
     <div>
-      <main>{drinkRecipes}</main>
+      {" "}
       <nav>
         <Link to="/">Back to home</Link>
       </nav>
+      <main>{drinkRecipes}</main>
     </div>
   );
 }

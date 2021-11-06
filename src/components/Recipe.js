@@ -182,7 +182,7 @@ function Recipe() {
 
   return (
     <div>
-      <main>{drinkRecipe}</main>
+      {" "}
       <nav>
         <Link to="/" key="home">
           Back to home
@@ -191,6 +191,7 @@ function Recipe() {
           Back to list
         </Link>
       </nav>
+      <main>{drinkRecipe}</main>
     </div>
   );
 }

@@ -17,4 +17,4 @@ TheCocktailDB
 https://www.thecocktaildb.com/api.php
 
 _Heroku link_
-https://pro-cocktail-app.herokuapp.com/
+https://cocktail-app-pro.herokuapp.com/

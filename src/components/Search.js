@@ -12,13 +12,15 @@ function Search() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Find drink recipe:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <i>Find drink recipe</i>
       </label>
+      <br />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+
       <input type="submit" value="Search" />
     </form>
   );
