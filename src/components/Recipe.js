@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import testData from "./drink.json";
+//import testData from "./drink.json";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function Recipe() {
   let [drinkRecipe, setDrinkRecipe] = useState([]);
   const { id } = useParams();
+  const { keyword } = useParams();
   const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-
-  useEffect(() => {
-    getDataFromAPI();
-  }, []);
 
   const getIngredients = (drinksFound) => {
     let name = [];
@@ -34,58 +31,107 @@ function Recipe() {
       // console.log("Ingredients:", ingredientsArray);
       // console.log("Measures:", measuresArray);
     });
-
-    let html = "<table class='ingtable'>";
+    console.log("Measures:", amount);
+    let html = `<table class='ingtable'/>`;
 
     for (var i = 0; i < name.length; i++) {
-      html += "<tr>";
+      html += `<tr>`;
       html += `<td>${amount[i]}</td><td>${name[i]}</td>`;
-      html += "<tr>";
+      html += `<tr>`;
     }
 
     html += "</table>";
     return html;
   };
+  useEffect(() => {
+    const getDataFromAPI = async () => {
+      console.log("getDataFromAPI");
+      axios
+        .get(`${baseURL}`)
+        .then((res) => {
+          const drinksFound = res.data;
 
-  const getDataFromAPI = async () => {
-    axios.get(`${baseURL}`).then((res) => {
-      const drinksFound = res.data;
+          //const drinksFound = testData; // for testing
 
-      //const drinksFound = testData; // for testing
-
-      if (drinksFound === "" || drinksFound.drinks == null) {
-        setDrinkRecipe(
-          <div>
-            <h2>No drink found</h2>
-          </div>
-        );
-      } else {
-        setDrinkRecipe(
-          drinksFound.drinks.map((drink) => {
-            return (
+          if (drinksFound === "" || drinksFound.drinks == null) {
+            setDrinkRecipe(
               <div>
-                <h2>
-                  <i>{drink.strDrink}</i>
-                </h2>
-                {
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: getIngredients(drinksFound),
-                    }}
-                  />
-                }
+                <h2>No drink found</h2>
               </div>
             );
-          })
-        );
-      }
-    });
+          } else {
+            setDrinkRecipe(
+              drinksFound.drinks.map((drink) => {
+                return (
+                  <div>
+                    <img
+                      className="drinkImg"
+                      src={drink.strDrinkThumb}
+                      alt={drink.strDrink}
+                    />
+                    <h2>
+                      <i>{drink.strDrink}</i>
+                    </h2>
+                    <p className="glassType">{drink.strGlass}</p>
+                    <p className="isAlcoholic">{drink.strAlcoholic}</p>
+                    <p className="inst">
+                      <span>Instructions: </span>
+                      {drink.strInstructions}
+                    </p>
+                    {
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: getIngredients(drinksFound),
+                        }}
+                      />
+                    }
+                  </div>
+                );
+              })
+            );
+          }
+        })
+        .catch((error) => {
+          // Error
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            // console.log(error.response.data);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the
+            // browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
 
-    /*
-     */
-  };
+      console.log("haku");
+    };
+    if (keyword !== "") {
+      getDataFromAPI();
+    }
+  }, [keyword, baseURL]);
 
-  return <div>{drinkRecipe}</div>;
+  return (
+    <div>
+      <main>{drinkRecipe}</main>
+      <nav>
+        <Link to="/" key="home">
+          Back to home
+        </Link>
+        <Link to={{ pathname: `/${keyword}` }} key="back">
+          Back to list
+        </Link>
+      </nav>
+    </div>
+  );
 }
 
 export default Recipe;
