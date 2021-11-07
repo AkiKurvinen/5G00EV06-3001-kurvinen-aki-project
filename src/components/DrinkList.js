@@ -19,14 +19,16 @@ function DrinkList() {
     axios.get(`${baseURL}`).then((res) => {
       drinksFound = res.data;
       if (res.data.drinks == null) {
-        setDrinkRecipes("No drinks found");
+        setDrinkRecipes(`No drinks found for "${keyword}"`);
       } else {
         setDrinkRecipes(
           drinksFound.drinks.map((drink) => {
             return (
-              <Link key={drink.idDrink} to={`/${keyword}/${drink.idDrink}`}>
-                <li key={drink.idDrink}>{drink.strDrink}</li>
-              </Link>
+              <li key={drink.idDrink}>
+                <Link key={drink.idDrink} to={`/${keyword}/${drink.idDrink}`}>
+                  {drink.strDrink}
+                </Link>
+              </li>
             );
           })
         );
@@ -41,12 +43,14 @@ function DrinkList() {
   };
 
   return (
-    <div>
-      {" "}
+    <div class="drinklist">
       <nav>
         <Link to="/">Back to home</Link>
       </nav>
-      <main>{drinkRecipes}</main>
+      <main>
+        {" "}
+        <ul>{drinkRecipes} </ul>
+      </main>
     </div>
   );
 }

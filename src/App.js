@@ -17,6 +17,7 @@ function App() {
           backgroundImage: `url("./images/restaurant-uv.jpg")`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
+          backgroundSize: "cover",
         }}
       >
         <Header />

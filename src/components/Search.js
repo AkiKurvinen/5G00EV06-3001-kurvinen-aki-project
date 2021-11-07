@@ -11,13 +11,10 @@ function Search() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        <i>Find drink recipe</i>
-      </label>
-      <br />
       <input
         type="text"
         value={name}
+        placeholder="Find drink recipe"
         onChange={(e) => setName(e.target.value)}
       />
 

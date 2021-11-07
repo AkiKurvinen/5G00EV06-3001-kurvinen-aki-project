@@ -36,13 +36,26 @@ function Recipe() {
 
     for (var i = 0; i < name.length; i++) {
       html += `<tr>`;
-      html += `<td>${amount[i]}</td><td>${name[i]}</td>`;
+      // html += `<td>${amount[i]}</td><td>${name[i]}</td>`;
+      html += `<td>${amount[i] === undefined ? " " : amount[i]}</td><td>${
+        name[i]
+      }</td>`;
       html += `<tr>`;
     }
 
     html += "</table>";
     return html;
   };
+  function getAlcIcon(isAlcoholic) {
+    let alc = isAlcoholic.toLowerCase();
+    if (alc.includes("non")) {
+      return "zero";
+    } else if (alc.includes("alcoholic")) {
+      return "alcoholic";
+    } else {
+      return "nodata";
+    }
+  }
   function getGlassIcon(glasstype, drinkName) {
     let glass = glasstype.toLowerCase();
 
@@ -120,25 +133,36 @@ function Recipe() {
                     <h2>
                       <i>{drink.strDrink}</i>
                     </h2>
-                    <figure>
-                      <img
-                        className="glassImg"
-                        src={
-                          "/images/glass/" +
-                          getGlassIcon(drink.strGlass, drink.strDrink) +
-                          ".png"
-                        }
-                        alt={drink.strGlass}
-                      />{" "}
-                      <figcaption className="glassType">
-                        {drink.strGlass}
-                      </figcaption>
-                    </figure>
-                    <p className="isAlcoholic">{drink.strAlcoholic}</p>
-                    <p className="inst">
-                      <span>Instructions: </span>
-                      {drink.strInstructions}
-                    </p>
+                    <div class="drinkinfo">
+                      <figure>
+                        <img
+                          className="glassImg"
+                          src={
+                            "/images/glass/" +
+                            getGlassIcon(drink.strGlass, drink.strDrink) +
+                            ".png"
+                          }
+                          alt={drink.strGlass}
+                        />
+                        <figcaption className="glassType">
+                          {drink.strGlass}
+                        </figcaption>
+                      </figure>
+                      <figure>
+                        <img
+                          className="glassImg"
+                          src={
+                            "/images/glass/" +
+                            getAlcIcon(drink.strAlcoholic) +
+                            ".png"
+                          }
+                          alt={drink.strGlass}
+                        />
+                        <figcaption className="isAlcoholic">
+                          {drink.strAlcoholic}
+                        </figcaption>
+                      </figure>
+                    </div>
                     {
                       <div
                         dangerouslySetInnerHTML={{
@@ -146,6 +170,7 @@ function Recipe() {
                         }}
                       />
                     }
+                    <p className="inst">{drink.strInstructions}</p>
                   </div>
                 );
               })
@@ -181,7 +206,7 @@ function Recipe() {
   }, [keyword, baseURL]);
 
   return (
-    <div>
+    <div class="content">
       {" "}
       <nav>
         <Link to="/" key="home">
