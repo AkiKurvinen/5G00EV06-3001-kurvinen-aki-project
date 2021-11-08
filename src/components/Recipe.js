@@ -31,7 +31,7 @@ function Recipe() {
       // console.log("Ingredients:", ingredientsArray);
       // console.log("Measures:", measuresArray);
     });
-    console.log("Measures:", amount);
+    //console.log("Measures:", amount);
     let html = `<table class='ingtable'/>`;
 
     for (var i = 0; i < name.length; i++) {
@@ -124,7 +124,7 @@ function Recipe() {
             setDrinkRecipe(
               drinksFound.drinks.map((drink) => {
                 return (
-                  <div>
+                  <div key="drink">
                     <img
                       className="drinkImg"
                       src={drink.strDrinkThumb + "/preview"}
@@ -133,7 +133,7 @@ function Recipe() {
                     <h2>
                       <i>{drink.strDrink}</i>
                     </h2>
-                    <div class="drinkinfo">
+                    <div className="drinkinfo">
                       <figure>
                         <img
                           className="glassImg"
@@ -178,27 +178,15 @@ function Recipe() {
           }
         })
         .catch((error) => {
-          // Error
           if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            // console.log(error.response.data);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
+            console.log(error.response.status);
           } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the
-            // browser and an instance of
-            // http.ClientRequest in node.js
             console.log(error.request);
           } else {
-            // Something happened in setting up the request that triggered an Error
             console.log("Error", error.message);
           }
           console.log(error.config);
         });
-
-      console.log("haku");
     };
     if (keyword !== "") {
       getDataFromAPI();
@@ -206,7 +194,7 @@ function Recipe() {
   }, [keyword, baseURL]);
 
   return (
-    <div class="content">
+    <div className="content">
       {" "}
       <nav>
         <Link to="/" key="home">

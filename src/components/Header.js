@@ -4,7 +4,7 @@ function Header() {
   return (
     <header
       style={{
-        backgroundImage: `url("./images/app-logo.png")`,
+        backgroundImage: `url("../images/app-logo.png")`,
         backgroundRepeat: "no-repeat",
       }}
     ></header>

@@ -1,4 +1,3 @@
-import React from "react";
 import Recipe from "./components/Recipe.js";
 import Home from "./components/Home.js";
 import DrinkList from "./components/DrinkList.js";
@@ -14,7 +13,7 @@ function App() {
       <div
         className="App"
         style={{
-          backgroundImage: `url("./images/restaurant-uv.jpg")`,
+          backgroundImage: `url("../images/restaurant-uv.jpg")`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
