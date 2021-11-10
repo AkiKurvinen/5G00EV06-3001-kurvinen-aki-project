@@ -18,3 +18,12 @@ https://www.thecocktaildb.com/api.php
 
 _Heroku link_
 https://cocktail-app-pro.herokuapp.com/
+
+## Release 1: 2021-11-15 features
+
+- Search cocktails by name (keyword)
+- If only one match search criteria, display recipe immediately
+- Else display list of drinks containing keyword as links
+- Display cocktail image, recipe, name, glass type, ‘is alcoholic’ and instructions
+- Navigation back to home or list view
+- Responsive UI
