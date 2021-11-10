@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 
 function Search() {
-  const [name, setName] = useState("");
+  let [name, setName] = useState("");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    //  alert(`Your search: ${name}`);
+
+    // fix common search mistakes:
+    if (name.toLowerCase() === "b52" || name.toLowerCase() === "b 52") {
+      name = "b-52";
+    }
+
     window.location.href = `/${name}`;
   };
 

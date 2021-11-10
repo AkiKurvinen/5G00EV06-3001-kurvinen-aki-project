@@ -27,11 +27,8 @@ function Recipe() {
 
       name = ingredientsArray;
       amount = measuresArray;
-
-      // console.log("Ingredients:", ingredientsArray);
-      // console.log("Measures:", measuresArray);
     });
-    //console.log("Measures:", amount);
+
     let html = `<table class='ingtable'/>`;
 
     for (var i = 0; i < name.length; i++) {
@@ -85,10 +82,10 @@ function Recipe() {
       return "pitcher";
     } else if (glass.includes("whiskey sour")) {
       return "whisky-sour-glass";
-    } else if (glass.includes("coupette")) {
-      return "coupe";
     } else if (glass.includes("margarita")) {
       return "margarita";
+    } else if (glass.includes("coupette")) {
+      return "coupe";
     } else if (glass.includes("nick")) {
       return "nick-and-nora";
     } else if (glass.includes("balloon")) {
@@ -96,9 +93,7 @@ function Recipe() {
     } else if (glass.includes("parfait")) {
       return "parfait";
     } else if (glass.includes("cocktail")) {
-      return drinkName.toLowerCase().includes("margarita")
-        ? "margarita"
-        : "martini";
+      return "martini";
     } else {
       return "noicon";
     }

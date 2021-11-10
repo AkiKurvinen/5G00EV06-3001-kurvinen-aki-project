@@ -14,6 +14,8 @@ function DrinkList() {
         const drinksFound = res.data;
         if (res.data.drinks == null) {
           setDrinkRecipes(`No drinks found for "${keyword}"`);
+        } else if (drinksFound.drinks.length === 1) {
+          window.location.href = `/${keyword}/${drinksFound.drinks[0].idDrink}`;
         } else {
           setDrinkRecipes(
             drinksFound.drinks.map((drink) => {
