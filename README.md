@@ -27,3 +27,7 @@ https://cocktail-app-pro.herokuapp.com/
 - Display cocktail image, recipe, name, glass type, ‘is alcoholic’ and instructions
 - Navigation back to home or list view
 - Responsive UI
+
+## Know bugs and defects
+
+- Recipe does not utilize JSON already fetched in List view
