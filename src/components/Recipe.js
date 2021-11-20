@@ -34,9 +34,35 @@ function Recipe() {
     for (var i = 0; i < name.length; i++) {
       html += `<tr>`;
       // html += `<td>${amount[i]}</td><td>${name[i]}</td>`;
-      html += `<td>${amount[i] === undefined ? " " : amount[i]}</td><td>${
-        name[i]
-      }</td>`;
+      // html += `<td>${amount[i] === undefined ? " " : amount[i]}</td><td>${name[i]}</td>`;
+      html += `<td>`;
+      if (amount[i] === undefined) {
+        html += " ";
+      } else if (amount[i].toLowerCase().includes(" oz")) {
+        let match = null,
+          frac = null,
+          integers = null;
+        match = amount[i].match(/^([\S]+)/gm); // get numbers
+        frac = amount[i].match(/(?:[1-9][0-9]*|0)\/[1-9][0-9]*/gm); // get fractions
+        integers = parseFloat(match) * 2.95735296; // covert oz to cl
+        var result = 0;
+        if (frac) {
+          var a = frac.toString();
+          var split = a.split("/");
+          result = parseInt(split[0], 10) / parseInt(split[1], 10);
+          result = result * 2.95735296;
+        }
+        integers += result;
+        integers = Math.round(integers / 0.5) * 0.5;
+        html += " " + integers;
+        html += " cl";
+      } else if (amount[i].toLowerCase().includes(" ml")) {
+        let match = amount[i].match(/^([\S]+)/gm);
+        html += match / 10 + " cl";
+      } else {
+        html += amount[i];
+      }
+      html += `</td><td>${name[i]}</td>`;
       html += `<tr>`;
     }
 
