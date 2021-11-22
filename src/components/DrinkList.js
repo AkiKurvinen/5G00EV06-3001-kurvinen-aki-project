@@ -36,24 +36,24 @@ function DrinkList() {
       });
     };
 
+    // find if drink is custom
     var keys;
-
     for (keys = 0; keys < customData.drinks.length; keys++) {
-      console.log(customData.drinks[keys].strDrink);
       if (
         customData.drinks[keys].strDrink.toLocaleLowerCase() === keyword ||
         customData.drinks[keys].strDrink === keyword
       ) {
-        console.log("found custom drink");
         window.location.href = `/custom/${customData.drinks[keys].idDrink}`;
         break;
-      } else {
-        console.log("not yet found custom drink");
       }
     }
+
+    // drink is not custom
     if (window.location.href.indexOf("custom") === -1) {
       getDataFromAPI();
-    } else {
+    }
+    // display list of all custom drinks
+    else {
       setDrinkRecipes(
         customData.drinks.map((drink) => {
           return (
@@ -63,14 +63,13 @@ function DrinkList() {
                   pathname: `/${keyword}/${drink.idDrink}`,
                 }}
               >
-                {drink.strDrink}
+                {drink.strDrink}*
               </Link>
             </li>
           );
         })
       );
     }
-    console.log("[DrinkList] getDataFromAPI");
   }, [baseURL, keyword]);
   return (
     <div className="drinklist">

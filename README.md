@@ -28,6 +28,12 @@ https://cocktail-app-pro.herokuapp.com/
 - Navigation back to home or list view
 - Responsive UI
 
+## Release 2: 2021-11-29 features
+
+- Prevent special characters in search box
+- Display units in centiliters (cl)
+- Include custom drinks JSON
+
 ## Know bugs and defects
 
 - Recipe does not utilize JSON already fetched in List view

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Recent function is not implemented
 function Recent(props) {
   let [recentSearch, setRecentSearch] = useState([]);
   useEffect(() => {

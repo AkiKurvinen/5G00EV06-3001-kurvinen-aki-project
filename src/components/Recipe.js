@@ -5,7 +5,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 const customData = require("./customDrinks.json");
-const singleDrink = require("./drink.json");
 function Recipe() {
   let [drinkRecipe, setDrinkRecipe] = useState([]);
   const { id } = useParams();
@@ -151,9 +150,6 @@ function Recipe() {
         .get(`${baseURL}`)
         .then((res) => {
           const drinksFound = res.data;
-
-          //const drinksFound = testData; // for testing
-
           if (drinksFound === "" || drinksFound.drinks == null) {
             setDrinkRecipe(
               <div>
@@ -232,12 +228,9 @@ function Recipe() {
       //  Drink is custom
       if (window.location.href.indexOf("custom") > -1) {
         const customDrinkID = parseInt(window.location.href.split("/").pop());
-        console.log("Custom...");
 
         // Remove other drinks from custom list to use getIngredients-function later
         let drinksFound = { drinks: [customData.drinks[customDrinkID]] };
-        console.log(drinksFound);
-        console.log(singleDrink);
         setDrinkRecipe(
           <div key={customData.drinks[customDrinkID].strDrink}>
             <img
@@ -246,7 +239,7 @@ function Recipe() {
               alt={customData.drinks[customDrinkID].strDrink}
             />
             <h2>
-              <i>{customData.drinks[customDrinkID].strDrink}</i>
+              <i>{customData.drinks[customDrinkID].strDrink}*</i>
             </h2>
             <div className="drinkinfo">
               <figure>
@@ -293,7 +286,6 @@ function Recipe() {
             </p>
           </div>
         );
-        //
       }
       //  Drink is not custom
       else {

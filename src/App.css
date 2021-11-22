@@ -63,6 +63,7 @@ main ul li {
   background-color: rgba(40, 0, 40, 0.7);
   margin-bottom: 2px;
 }
+
 nav a,
 nav a:visited {
   color: magenta;
@@ -88,7 +89,6 @@ body {
   color: white;
   position: relative;
   height: 100vh;
-  overflow: hidden;
 }
 h1 {
   margin-top: 2em;
@@ -132,7 +132,7 @@ form {
   max-width: 400px;
   margin: 0 auto;
 }
-form input[type="text"] {
+form input {
   border: 1px solid cyan;
   background-color: rgba(0, 57, 83, 0.5);
   height: 2.5em;
@@ -155,6 +155,10 @@ form input[type="submit"] {
 }
 form input[type="submit"]:hover {
   background-color: cyan;
+}
+form .errInput {
+  border: 1px solid crimson;
+  background-color: rgba(83, 0, 0, 0.5);
 }
 .drinkImg {
   display: block;
@@ -237,6 +241,7 @@ figure {
     width: 100%;
     bottom: 0;
   }
+
   footer {
     width: 100%;
     position: fixed;
