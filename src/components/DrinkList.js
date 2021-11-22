@@ -6,6 +6,7 @@ const customData = require("./customDrinks.json");
 function DrinkList() {
   const { keyword } = useParams();
   let [drinkRecipes, setDrinkRecipes] = useState([]);
+  let [isCustom, setIscustom] = useState("");
   const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${keyword}`;
 
   useEffect(() => {
@@ -36,24 +37,23 @@ function DrinkList() {
       });
     };
 
-    // find if drink is custom
+    // if drink is custom, go to recipe
     var keys;
     for (keys = 0; keys < customData.drinks.length; keys++) {
-      if (
-        customData.drinks[keys].strDrink.toLocaleLowerCase() === keyword ||
-        customData.drinks[keys].strDrink === keyword
-      ) {
+      if (customData.drinks[keys].strDrink.toLowerCase() === keyword) {
         window.location.href = `/custom/${customData.drinks[keys].idDrink}`;
         break;
       }
     }
 
-    // drink is not custom
+    // drink is not custom, find it using API
     if (window.location.href.indexOf("custom") === -1) {
       getDataFromAPI();
     }
+
     // display list of all custom drinks
     else {
+      setIscustom("*Drinks from custom list");
       setDrinkRecipes(
         customData.drinks.map((drink) => {
           return (
@@ -75,8 +75,8 @@ function DrinkList() {
     <div className="drinklist">
       {" "}
       <main>
-        {" "}
-        <ul>{drinkRecipes} </ul>
+        <ul>{drinkRecipes}</ul>
+        <small>{isCustom}</small>
       </main>
     </div>
   );

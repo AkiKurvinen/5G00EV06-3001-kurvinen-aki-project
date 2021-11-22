@@ -37,3 +37,5 @@ https://cocktail-app-pro.herokuapp.com/
 ## Know bugs and defects
 
 - Recipe does not utilize JSON already fetched in List view
+- Custom drinks are not displayed among official drinks
+- Only first keyword matching custom drink is displayed

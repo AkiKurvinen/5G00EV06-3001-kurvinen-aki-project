@@ -85,7 +85,7 @@ function Recipe() {
     html += "</table>";
     return html;
   };
-  // find alcoholic / non alcoholic icon, else display 'no data'-icon
+  // find alcoholic or non alcoholic icon, else display 'no data'-icon
   function getAlcIcon(isAlcoholic) {
     let alc = isAlcoholic.toLowerCase();
     if (alc.includes("non")) {
@@ -138,6 +138,8 @@ function Recipe() {
       return "parfait";
     } else if (glass.includes("cocktail")) {
       return "martini";
+    } else if (glass.includes("bowl")) {
+      return "bowl";
     } else {
       return "noicon";
     }
@@ -284,6 +286,7 @@ function Recipe() {
             <p className="inst">
               {customData.drinks[customDrinkID].strInstructions}
             </p>
+            <small>*Drinks from custom list</small>
           </div>
         );
       }
