@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+const customData = require("./customDrinks.json");
 function DrinkList() {
   const { keyword } = useParams();
   let [drinkRecipes, setDrinkRecipes] = useState([]);
@@ -35,8 +35,21 @@ function DrinkList() {
         }
       });
     };
-    getDataFromAPI();
-    console.log("[DrinkList] getDataFromAPI");
+
+    //
+    var keys;
+    for (keys = 0; keys < customData.drinks.length; ++keys) {
+      console.log(customData.drinks[keys].strDrink);
+      if (customData.drinks[keys].strDrink === keyword) {
+        console.log("found custom drink");
+        // window.location.href = `/${keyword}/${customData.drinks[keys].idDrink}`;
+        window.location.href = `/custom/${customData.drinks[keys].idDrink}`;
+      } else {
+        getDataFromAPI();
+        console.log("[DrinkList] getDataFromAPI");
+      }
+    }
+    //
   }, [baseURL, keyword]);
   return (
     <div className="drinklist">

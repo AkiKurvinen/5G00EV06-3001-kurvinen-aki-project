@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
+
 //import testData from "./drink.json";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+const customData = require("./customDrinks.json");
+const singleDrink = require("./drink.json");
 function Recipe() {
   let [drinkRecipe, setDrinkRecipe] = useState([]);
   const { id } = useParams();
   const { keyword } = useParams();
   const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
 
+  // make drink ingradients table
   const getIngredients = (drinksFound) => {
     let name = [];
     let amount = [];
+
+    // API won't return ingredients in array format
+    // so we have to convert keys and values to arrays
 
     drinksFound.drinks.forEach((drink) => {
       const drinkEntries = Object.entries(drink),
@@ -29,16 +36,22 @@ function Recipe() {
       amount = measuresArray;
     });
 
+    // start building html-table element
     let html = `<table class='ingtable'/>`;
 
     for (var i = 0; i < name.length; i++) {
       html += `<tr>`;
-      // html += `<td>${amount[i]}</td><td>${name[i]}</td>`;
-      // html += `<td>${amount[i] === undefined ? " " : amount[i]}</td><td>${name[i]}</td>`;
       html += `<td>`;
+
+      // API returns ingredients in various units
+      // so they will be converted to cl (centiliter)
+
+      // ingredients that don't have unit:
       if (amount[i] === undefined) {
         html += " ";
-      } else if (amount[i].toLowerCase().includes(" oz")) {
+      }
+      // ingredients using oz-units :
+      else if (amount[i].toLowerCase().includes(" oz")) {
         let match = null,
           frac = null,
           integers = null;
@@ -56,10 +69,14 @@ function Recipe() {
         integers = Math.round(integers / 0.5) * 0.5;
         html += " " + integers;
         html += " cl";
-      } else if (amount[i].toLowerCase().includes(" ml")) {
+      }
+      // ingredients using ml-units :
+      else if (amount[i].toLowerCase().includes(" ml")) {
         let match = amount[i].match(/^([\S]+)/gm);
         html += match / 10 + " cl";
-      } else {
+      }
+      // ingredients using unknown units:
+      else {
         html += amount[i];
       }
       html += `</td><td>${name[i]}</td>`;
@@ -69,6 +86,7 @@ function Recipe() {
     html += "</table>";
     return html;
   };
+  // find alcoholic / non alcoholic icon, else display 'no data'-icon
   function getAlcIcon(isAlcoholic) {
     let alc = isAlcoholic.toLowerCase();
     if (alc.includes("non")) {
@@ -79,7 +97,8 @@ function Recipe() {
       return "nodata";
     }
   }
-  function getGlassIcon(glasstype, drinkName) {
+  // find glass icon based on 'glasstype', else return default icon
+  function getGlassIcon(glasstype) {
     let glass = glasstype.toLowerCase();
 
     if (glass.includes("mug")) {
@@ -210,7 +229,76 @@ function Recipe() {
         });
     };
     if (keyword !== "") {
-      getDataFromAPI();
+      //  Drink is custom
+      if (window.location.href.indexOf("custom") > -1) {
+        const customDrinkID = parseInt(window.location.href.split("/").pop());
+        console.log("Custom...");
+
+        // Remove other drinks from custom list to use getIngredients-function later
+        let drinksFound = { drinks: [customData.drinks[customDrinkID]] };
+        console.log(drinksFound);
+        console.log(singleDrink);
+        setDrinkRecipe(
+          <div key={customData.drinks[customDrinkID].strDrink}>
+            <img
+              className="drinkImg"
+              src={customData.drinks[customDrinkID].strDrinkThumb}
+              alt={customData.drinks[customDrinkID].strDrink}
+            />
+            <h2>
+              <i>{customData.drinks[customDrinkID].strDrink}</i>
+            </h2>
+            <div className="drinkinfo">
+              <figure>
+                <img
+                  className="glassImg"
+                  src={
+                    "/images/glass/" +
+                    getGlassIcon(
+                      customData.drinks[customDrinkID].strGlass,
+                      customData.drinks[customDrinkID].strDrink
+                    ) +
+                    ".png"
+                  }
+                  alt={customData.drinks[customDrinkID].strGlass}
+                />
+                <figcaption className="glassType">
+                  {customData.drinks[customDrinkID].strGlass}
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  className="glassImg"
+                  src={
+                    "/images/glass/" +
+                    getAlcIcon(customData.drinks[customDrinkID].strAlcoholic) +
+                    ".png"
+                  }
+                  alt={customData.drinks[customDrinkID].strGlass}
+                />
+                <figcaption className="isAlcoholic">
+                  {customData.drinks[customDrinkID].strAlcoholic}
+                </figcaption>
+              </figure>
+            </div>
+            {
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: getIngredients(drinksFound),
+                }}
+              />
+            }
+            <p className="inst">
+              {customData.drinks[customDrinkID].strInstructions}
+            </p>
+          </div>
+        );
+        //
+      }
+      //  Drink is not custom
+      else {
+        getDataFromAPI();
+      }
     }
   }, [keyword, baseURL]);
 

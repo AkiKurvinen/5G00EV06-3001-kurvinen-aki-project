@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import Recent from "./Recent.js";
 
 function Search() {
   let [name, setName] = useState("");
@@ -10,7 +11,6 @@ function Search() {
     if (name.toLowerCase() === "b52" || name.toLowerCase() === "b 52") {
       name = "b-52";
     }
-
     window.location.href = `/${name}`;
   };
 
