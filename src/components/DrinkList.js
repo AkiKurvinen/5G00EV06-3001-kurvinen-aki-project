@@ -36,20 +36,41 @@ function DrinkList() {
       });
     };
 
-    //
     var keys;
-    for (keys = 0; keys < customData.drinks.length; ++keys) {
+
+    for (keys = 0; keys < customData.drinks.length; keys++) {
       console.log(customData.drinks[keys].strDrink);
-      if (customData.drinks[keys].strDrink === keyword) {
+      if (
+        customData.drinks[keys].strDrink.toLocaleLowerCase() === keyword ||
+        customData.drinks[keys].strDrink === keyword
+      ) {
         console.log("found custom drink");
-        // window.location.href = `/${keyword}/${customData.drinks[keys].idDrink}`;
         window.location.href = `/custom/${customData.drinks[keys].idDrink}`;
+        break;
       } else {
-        getDataFromAPI();
-        console.log("[DrinkList] getDataFromAPI");
+        console.log("not yet found custom drink");
       }
     }
-    //
+    if (window.location.href.indexOf("custom") === -1) {
+      getDataFromAPI();
+    } else {
+      setDrinkRecipes(
+        customData.drinks.map((drink) => {
+          return (
+            <li key={drink.idDrink}>
+              <Link
+                to={{
+                  pathname: `/${keyword}/${drink.idDrink}`,
+                }}
+              >
+                {drink.strDrink}
+              </Link>
+            </li>
+          );
+        })
+      );
+    }
+    console.log("[DrinkList] getDataFromAPI");
   }, [baseURL, keyword]);
   return (
     <div className="drinklist">
