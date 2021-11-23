@@ -9,10 +9,16 @@ function Recipe() {
   let [drinkRecipe, setDrinkRecipe] = useState([]);
   const { id } = useParams();
   const { keyword } = useParams();
-  const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id.slice(
-    0,
-    -1
-  )}`;
+
+  // Find if user came from List view
+  const baseURL =
+    id.toString().substring(id.length - 1, id.length) !== "s" &&
+    id.toString().substring(id.length - 1, id.length) !== "m"
+      ? `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+      : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id.slice(
+          0,
+          -1
+        )}`;
 
   // make drink ingradients table
   const getIngredients = (drinksFound) => {
@@ -299,6 +305,9 @@ function Recipe() {
       }
     }
   }, [keyword, baseURL]);
+
+  // Set navigation links based on previous List view
+  // s=single drink, m=multiple drinks matched criteria
   let navigation = ``;
   if (id.toString().substring(id.length - 1, id.length) === "s") {
     navigation = (

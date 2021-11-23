@@ -16,8 +16,10 @@ function DrinkList() {
         if (res.data.drinks == null) {
           setDrinkRecipes(`No drinks found for "${keyword}"`);
         } else if (drinksFound.drinks.length === 1) {
+          // Only one drink matched the criteria
           window.location.href = `/${keyword}/${drinksFound.drinks[0].idDrink}s`;
         } else {
+          // Multiple drinks matched the criteria
           setDrinkRecipes(
             drinksFound.drinks.map((drink) => {
               return (
