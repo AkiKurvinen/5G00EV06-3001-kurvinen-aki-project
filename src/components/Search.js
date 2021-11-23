@@ -19,11 +19,12 @@ function Search() {
     // and give feedback to user
     if (regCheck(name)) {
       document.getElementById("searchInput").className = "errInput";
-      document.getElementById("searchInfo").innerHTML =
-        "Invalid characters in search";
+      let element = document.getElementById("searchInfo");
+      element.innerHTML = "Invalid characters in search";
+      element.className = "";
     } else {
-      document.getElementById("searchInput").className = "";
-
+      document.getElementById("searchInfo").className = "";
+      document.getElementById("searchInput").className = "displayNone";
       // fix common search mistakes:
       if (name === "b52" || name === "b 52") {
         name = "b-52";
@@ -43,7 +44,7 @@ function Search() {
       />
 
       <input type="submit" value="Search" />
-      <p id="searchInfo"></p>
+      <p id="searchInfo" className="displayNone"></p>
     </form>
   );
 }

@@ -246,7 +246,18 @@ figure {
     width: 100%;
     bottom: 0;
   }
+  #searchInfo {
+    margin-top: 0;
+    margin-left: 1em;
+    background-color: black;
 
+    height: 30px;
+    width: 100%;
+    text-align: left;
+  }
+  .displayNone {
+    display: none;
+  }
   footer {
     width: 100%;
     position: fixed;
