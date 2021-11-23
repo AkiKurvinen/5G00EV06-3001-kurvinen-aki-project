@@ -9,7 +9,10 @@ function Recipe() {
   let [drinkRecipe, setDrinkRecipe] = useState([]);
   const { id } = useParams();
   const { keyword } = useParams();
-  const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const baseURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id.slice(
+    0,
+    -1
+  )}`;
 
   // make drink ingradients table
   const getIngredients = (drinksFound) => {
@@ -296,10 +299,17 @@ function Recipe() {
       }
     }
   }, [keyword, baseURL]);
-
-  return (
-    <div className="content">
-      {" "}
+  let navigation = ``;
+  if (id.toString().substring(id.length - 1, id.length) === "s") {
+    navigation = (
+      <nav>
+        <Link to="/" key="home">
+          Back to home
+        </Link>
+      </nav>
+    );
+  } else {
+    navigation = (
       <nav>
         <Link to="/" key="home">
           Back to home
@@ -308,6 +318,12 @@ function Recipe() {
           Back to list
         </Link>
       </nav>
+    );
+  }
+  return (
+    <div className="content black-bg">
+      {" "}
+      {navigation}
       <main>{drinkRecipe}</main>
     </div>
   );

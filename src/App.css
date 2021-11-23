@@ -61,7 +61,7 @@ main ul li {
   list-style: none;
 
   display: block;
-  background-color: rgba(40, 0, 40, 0.7);
+  background-color: rgba(40, 0, 40, 0.9);
   margin-bottom: 2px;
 }
 
@@ -96,6 +96,7 @@ h1 {
   display: inline-block;
   text-align: center;
   width: 100%;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .App {
@@ -103,13 +104,15 @@ h1 {
   text-align: center;
   padding-top: 3em;
   box-sizing: border-box;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed;
+  background-position: left bottom, right bottom;
 }
 main {
   max-height: 50vh;
   overflow: auto;
 }
 .Container {
-  background-color: rgba(0, 0, 0, 0.5);
   display: inline-block;
   margin-top: 1em;
   text-align: left;
@@ -118,7 +121,9 @@ main {
   max-width: 600px;
   width: 100%;
 }
-
+.black-bg {
+  background-color: rgba(0, 0, 0, 0.8);
+}
 header {
   margin: auto;
   width: 50%;
@@ -199,6 +204,12 @@ figure {
   display: inline-block;
   padding: 0px 5px;
 }
+@media only screen and (max-width: 1250px) {
+  .App {
+    background-size: 0px 0px, contain;
+    background-position: 0px 0px, 0px 30vh;
+  }
+}
 @media only screen and (max-width: 600px) {
   body {
     overflow-y: hidden;
@@ -250,7 +261,6 @@ figure {
     margin-top: 0;
     margin-left: 1em;
     background-color: black;
-
     height: 30px;
     width: 100%;
     text-align: left;

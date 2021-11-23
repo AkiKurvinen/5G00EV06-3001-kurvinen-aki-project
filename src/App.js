@@ -13,10 +13,7 @@ function App() {
       <div
         className="App"
         style={{
-          backgroundImage: `url("../images/restaurant-uv.jpg")`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
+          backgroundImage: `url("../images/left-drink.jpg"), url("../images/right-drink.jpg")`,
         }}
       >
         <Header />

@@ -16,7 +16,7 @@ function DrinkList() {
         if (res.data.drinks == null) {
           setDrinkRecipes(`No drinks found for "${keyword}"`);
         } else if (drinksFound.drinks.length === 1) {
-          window.location.href = `/${keyword}/${drinksFound.drinks[0].idDrink}`;
+          window.location.href = `/${keyword}/${drinksFound.drinks[0].idDrink}s`;
         } else {
           setDrinkRecipes(
             drinksFound.drinks.map((drink) => {
@@ -24,7 +24,7 @@ function DrinkList() {
                 <li key={drink.idDrink}>
                   <Link
                     to={{
-                      pathname: `/${keyword}/${drink.idDrink}`,
+                      pathname: `/${keyword}/${drink.idDrink}m`,
                     }}
                   >
                     {drink.strDrink}
