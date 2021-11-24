@@ -59,13 +59,22 @@ function Recipe() {
         html += " ";
       }
       // ingredients using oz-units :
-      else if (amount[i].toLowerCase().includes(" oz")) {
+      else if (
+        amount[i].toLowerCase().includes("oz") &&
+        !amount[i].toLowerCase().includes("ml")
+      ) {
         let match = null,
           frac = null,
           integers = null;
-        match = amount[i].match(/^([\S]+)/gm); // get numbers
+
         frac = amount[i].match(/(?:[1-9][0-9]*|0)\/[1-9][0-9]*/gm); // get fractions
-        integers = parseFloat(match) * 2.95735296; // covert oz to cl
+        amount[i] = amount[i].replace(frac, ""); // remove fraction part
+        match = amount[i].match(/^([\S]+)/gm); // get integers
+
+        if (match) {
+          integers = parseFloat(match) * 2.95735296; // covert oz to cl
+        }
+
         var result = 0;
         if (frac) {
           var a = frac.toString();
@@ -78,7 +87,7 @@ function Recipe() {
         html += " " + integers;
         html += " cl";
       }
-      // ingredients using ml-units :
+      // ingredients using ml-units:
       else if (amount[i].toLowerCase().includes(" ml")) {
         let match = amount[i].match(/^([\S]+)/gm);
         html += match / 10 + " cl";
@@ -309,7 +318,7 @@ function Recipe() {
   // Set navigation links based on previous List view
   // s=single drink, m=multiple drinks matched criteria
   let navigation = ``;
-  if (id.toString().substring(id.length - 1, id.length) === "s") {
+  if (id.toString().substring(id.length - 1, id.length) !== "m") {
     navigation = (
       <nav>
         <Link to="/" key="home">

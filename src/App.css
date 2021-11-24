@@ -41,7 +41,9 @@ form {
 .ingtable tr td {
   padding: 5px 10px;
 }
-
+.ingtable tr td:nth-child(odd) {
+  width: 30%;
+}
 main a {
   color: white;
   text-decoration: none;
@@ -256,6 +258,9 @@ figure {
     position: absolute;
     width: 100%;
     bottom: 0;
+  }
+  .ingtable tr td:nth-child(odd) {
+    width: 50%;
   }
   #searchInfo {
     margin-top: 0;
