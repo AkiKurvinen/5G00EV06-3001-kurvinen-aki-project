@@ -18,6 +18,8 @@ https://www.thecocktaildb.com/api.php
 
 _Heroku link_
 https://cocktail-app-pro.herokuapp.com/
+_Video presentation_
+https://youtu.be/cjp7-_56rbU
 
 ## Release 1: 2021-11-15 features
 
