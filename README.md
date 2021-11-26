@@ -34,6 +34,24 @@ https://cocktail-app-pro.herokuapp.com/
 - Display units in centiliters (cl)
 - Include custom drinks JSON
 
+## Routes
+
+- / (Root, display main page)
+- /{keyword} (Find drinks from API based on keyword and create list)
+- /{keyword}/{id} (Display details of specific cocktail based on id and link back to home page)
+- /{keyword}/{id}s (Same as above)
+- /{keyword}/{id}m (Same as above + link back to list view)
+
+## Components
+
+- DrinkList (Get and display list of keyword matching cocktails from API)
+- Recipe (Get and display single cocktail details by id from API)
+- Home (Things only on home page)
+- Header (Header logo)
+- Footer (Footer credits)
+- Recent (Not implemented list of user last searched drinks)
+- Data (Not implemented storage for fetched json data in list view that could be utilized in Recipe view)
+
 ## Know bugs and defects
 
 - Recipe does not utilize JSON already fetched in List view
