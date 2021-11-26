@@ -40,6 +40,7 @@ function Search() {
         type="text"
         value={name}
         placeholder="Find drink recipe"
+        autoComplete="off"
         onChange={(e) => setName(e.target.value.toLocaleLowerCase())}
       />
 
