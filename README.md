@@ -33,7 +33,7 @@ https://youtu.be/cjp7-_56rbU
 
 ## Release 2: 2021-11-29 features
 
-- Prevent special characters in search box
+- Prevent special characters other than dash in search box
 - Display units in centiliters (cl)
 - Include custom drinks JSON
 
@@ -41,7 +41,7 @@ https://youtu.be/cjp7-_56rbU
 
 - / (Root, display main page)
 - /{keyword} (Find drinks from API based on keyword and create list)
-- /{keyword}/{id} (Display details of specific cocktail based on id and link back to home page)
+- /{keyword}/{id} (Display details of specific cocktail based on id. Add link back to home page)
 - /{keyword}/{id}s (Same as above)
 - /{keyword}/{id}m (Same as above + link back to list view)
 
@@ -49,7 +49,7 @@ https://youtu.be/cjp7-_56rbU
 
 - DrinkList (Get and display list of keyword matching cocktails from API)
 - Recipe (Get and display single cocktail details by id from API)
-- Home (Things only on home page)
+- Home (Header for home page)
 - Header (Header logo)
 - Footer (Footer credits)
 - Recent (Not implemented list of user last searched drinks)
